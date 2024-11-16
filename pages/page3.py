@@ -1,18 +1,18 @@
+""" TODO: docstring """
+import time
 import streamlit as st
 import auth
-import time
-
-st.session_state.page3_counter = 1 + (st.session_state.get('page3_counter') or 0)
-st.write(f':blue[Page3 Counter: {st.session_state.page3_counter}] -> :orange[Auth valid:{auth.valid()} - role:\'{auth.get_role()}\' - user:\'{auth.get_user()}\']')
 
 st.header('This Page3 is available just to :red[admin] users')
 
 def goto_page(pagename, seconds):
+    """ TODO: docstring """
     w = st.empty()
-    for s in range(seconds,0,-1):
+    for s in range(seconds, 0, -1):
         w.write(f"This page will be redirected in **:red[{s}]** seconds.")
         time.sleep(1)
-    st.switch_page('app.py')
+    st.switch_page(pagename)
+
 
 # validate session role
 if not auth.valid():
@@ -20,7 +20,8 @@ if not auth.valid():
     st.image('img/access-0.png')
     goto_page('app.py', 5)
 elif not auth.role_in(['admin']):
-    st.error(f'**Role status**: You are currently logged as **{auth.get_role()}**, but you\'re not and **admin**.')
+    st.error(f'**Role status**: You are currently logged as **{auth.get_role()}**'
+             +', but you\'re not and **admin**.')
     st.image('img/access-0.png')
     goto_page('app.py', 5)
 

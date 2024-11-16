@@ -1,9 +1,6 @@
+""" TODO: docstring """
 import streamlit as st
 import auth
-import time
-
-st.session_state.page1_counter = 1 + (st.session_state.get('page1_counter') or 0)
-st.write(f':blue[Page1 Counter: {st.session_state.page1_counter}] -> :orange[Auth valid:{auth.valid()} - role:\'{auth.get_role()}\' - user:\'{auth.get_user()}\']')
 
 st.header('Page1 is available to :red[everyone]')
 

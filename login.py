@@ -1,27 +1,27 @@
-import streamlit as st
+""" TODO: docstring """
 import time
+import streamlit as st
 import auth
 
 import users_controller as userctl
 
-
 def do_login(username, password):
+    """ TODO: docstring """
     user = userctl.validate(username, password)
     if user:
         auth.set_role(user['role'])
         auth.set_user(user['userid'])
         return userctl.get_data(username)
-
-
-def do_logout():
-    auth.set_role('')
-    auth.set_user('')
     return None
 
 
+def do_logout():
+    """ TODO: docstring """
+    auth.set_role('')
+    auth.set_user('')
+
 def sidebar():
     """ cria tela de login no sidebar """
-    # TODO: passar como parametros as acoes pos-login e pos-logout
     login_area = st.sidebar.container(border=False)
     with login_area:
 
@@ -52,8 +52,8 @@ def sidebar():
 
 def sidebar3():
     """ cria tela de login no sidebar """
-    # TODO: passar como parametros as acoes pos-login e pos-logout
-    login_area3 = st.sidebar.container(border=False)
+
+#   login_area3 = st.sidebar.container(border=False)
 #    with login_area3:
 #        if auth.valid():
 #            user = auth.get_user()
@@ -76,4 +76,3 @@ def sidebar3():
 #                        st.rerun()
 #                    else:
 #                        login_area3.error('Usuário/senha inválidos')
-

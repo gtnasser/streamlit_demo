@@ -1,18 +1,17 @@
+""" TODO: docstring """
+import time
 import streamlit as st
 import auth
-import time
-
-st.session_state.page2_counter = 1 + (st.session_state.get('page2_counter') or 0)
-st.write(f':blue[Page2 Counter: {st.session_state.page2_counter}] -> :orange[Auth valid:{auth.valid()} - role:\'{auth.get_role()}\' - user:\'{auth.get_user()}\']')
 
 st.header('Page2 is available to :red[all logged users]')
 
 def goto_page(pagename, seconds):
+    """ TODO: docstring """
     w = st.empty()
     for s in range(seconds,0,-1):
         w.write(f"This page will be redirected in **:red[{s}]** seconds.")
         time.sleep(1)
-    st.switch_page('app.py')
+    st.switch_page(pagename)
 
 # validate session role
 if not auth.valid():

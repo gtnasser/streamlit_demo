@@ -8,3 +8,5 @@ The main goal is learning Streamlit Framework, but, I´ll fill this app with sev
 ### Features
 
 * multipage
+* user role session
+

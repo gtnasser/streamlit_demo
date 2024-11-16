@@ -3,8 +3,7 @@ import auth
 import time
 
 st.session_state.page2_counter = 1 + (st.session_state.get('page2_counter') or 0)
-st.write(f':blue[Page2 Counter: {st.session_state.page2_counter}]')
-st.write(f':green[auth.role: \'{auth.get_role()}\' of {auth.get_roles()}]')
+st.write(f':blue[Page2 Counter: {st.session_state.page2_counter}] -> :orange[Auth valid:{auth.valid()} - role:\'{auth.get_role()}\' - user:\'{auth.get_user()}\']')
 
 st.header('Page2 is available to :red[all logged users]')
 
@@ -16,7 +15,7 @@ def goto_page(pagename, seconds):
     st.switch_page('app.py')
 
 # validate session role
-if not auth.role_in(auth.get_roles()):
+if not auth.valid():
     st.error('**Role status**: You are currently not logged.')
     st.image('img/access-0.png')
     goto_page('app.py', 5)

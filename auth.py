@@ -1,21 +1,20 @@
 # usage: ???
 #
 # role -> regra atual
-# - default = 'none'
-# - deve ser atualiza apos a autenticacao do usuario -> 'auth.set_role("new_role")'
+# - default = ''
+# - deve ser atualizada apos a autenticacao do usuario -> 'auth.set_role("new_role")'
 # - pode ser recuperada com 'auth.get_role()'
 #
-# roles -> conjunto de regras
-# - default = ['user','admin']
-# - pode ser customizado com um novo conjunto -> `auth.set_roles([new_set])`
-# - pode ser recuperada com 'auth.get_roles()'
+# user -> usuario atual
+# - default = ''
+# - deve ser atualizado apos a autenticacao do usuario -> 'auth.set_user("new_user")'
+# - pode ser recuperado com 'auth.get_user()'
 #
 # valida se a role atual esta no conjunto -> `auth.role_in([this_set])`
 #
 
 # TODO: documentar: colocar versao, copy, usage, etc
 # TODO: krypto, jwt
-
 
 import streamlit as st
 import uuid
@@ -31,7 +30,7 @@ def check_session():
     if __key not in st.session_state:
         st.session_state[__key] = {
             'role': '',
-            'roles': ['user','admin']
+            'user': ''
         }
         print(f'session {__key} not found, recreating var')
 check_session()
@@ -42,23 +41,29 @@ def set_role(curr_role):
     st.session_state[__key]['role'] = curr_role
     #print(f"auth.role -> {st.session_state[__key]['role']}")
 
-# set current role
+# get current role
 def get_role():
     check_session()
     return st.session_state[__key]['role']
 
-# set custom roles
-def set_roles(new_set):
+# set current user
+def set_user(curr_user):
     check_session()
-    st.session_state[__key]['role'] = new_set
-    #print(f"auth.roles -> {st.session_state[__key]['roles']}")
+    st.session_state[__key]['user'] = curr_user
+    #print(f"auth.role -> {st.session_state[__key]['role']}")
 
-# get current roles
-def get_roles():
+# get current user
+def get_user():
     check_session()
-    return st.session_state[__key]['roles']
+    return st.session_state[__key]['user']
 
 # check if current role matchs
 def role_in(set_of_roles):
     check_session()
     return st.session_state[__key]['role'] in set_of_roles
+
+# check if defined role or user
+def valid():
+    check_session()
+    return bool(get_user() or get_role())
+

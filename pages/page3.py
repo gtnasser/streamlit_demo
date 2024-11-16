@@ -1,9 +1,31 @@
 import streamlit as st
+import auth
+import time
 
-st.session_state.Page3count = 1 + (st.session_state.get('Page3count') or 0)
+st.session_state.page3_counter = 1 + (st.session_state.get('page3_counter') or 0)
+st.write(f':blue[Page3 Counter: {st.session_state.page3_counter}]')
+st.write(f':green[auth.role: \'{auth.get_role()}\' of {auth.get_roles()}]')
 
-st.header('Page 3')
+st.header('This Page3 is available just to :red[admin] users')
 
-st.subheader('Page content here')
+def goto_page(pagename, seconds):
+    w = st.empty()
+    for s in range(seconds,0,-1):
+        w.write(f"This page will be redirected in **:red[{s}]** seconds.")
+        time.sleep(1)
+    st.switch_page('app.py')
 
-st.write(':red[session_state]:',st.session_state)
+# validate session role
+if not auth.role_in(auth.get_roles()):
+    st.error('**Role status**: You are currently not logged.')
+    st.image('img/access-0.png')
+    goto_page('app.py', 5)
+elif not auth.role_in(['admin']):
+    st.error(f'**Role status**: You are currently logged as **{auth.get_role()}**, but you\'re not and **admin**.')
+    st.image('img/access-0.png')
+    goto_page('app.py', 5)
+
+# show page content
+st.success(f'You are currently logged as **{auth.get_role()}**.')
+st.image('img/access-1.png')
+st.write('The content of this page is just visible by logged users.')

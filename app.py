@@ -1,14 +1,15 @@
 """ TODO: docstring """
 import streamlit as st
 
-st.write(f':blue[Main Page Counter: {st.session_state.app_counter}]' +
-         ' -> :orange[Auth valid:{auth.valid()} -' +
-         ' role:\'{auth.get_role()}\' - user:\'{auth.get_user()}\']')
+# count this page execution, creating session counter var at fist execution
+st.session_state.app_counter = 1 if 'app_counter' not in st.session_state else st.session_state.app_counter + 1
+
+st.write(f':blue[Main Page Counter: {st.session_state.app_counter}]')
 
 st.header('Demo Streamlit App')
 
 st.markdown('''
-This is my project powered by [Streamlit :streamlit:](https://streamlit.io/).
+This is my Sample App powered by [Streamlit :streamlit:](https://streamlit.io/).
 
 The main goal is FUN, despite the learning of Streamlit Framework.
 
@@ -20,7 +21,11 @@ st.write("")
 st.markdown('''
 ### Features
 
-* multipage
-* user role session
+:heavy_check_mark: multipage
+
+:white_large_square: user role session :ballot_box_with_check:
 
 ''')
+
+
+

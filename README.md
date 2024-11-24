@@ -1,11 +1,10 @@
 # streamlit_demo
 
-Repositório do app feito usando o framework [Streamlit](https://streamlit.io/).
+This is the repo of my [Streamlit](https://streamlit.io/) Sample App.
 
-The main goal is learning Streamlit Framework, but, I´ll fill this app with several sample pages.
+The main goal for me is FUN, despite of learning Streamlit Framework.
 
-
-### Features
+And I´ll add to this app several sample pages, using features like:
 
 * multipage
 * user role session

@@ -21,8 +21,8 @@ import uuid
 import streamlit as st
 
 # globals
-__key = '__auth__'
 __uuid4 = str(uuid.uuid4())
+__key = '__auth__' + __uuid4
 
 print('uuid4: ', __uuid4)
 
@@ -35,6 +35,13 @@ def check_session():
             'user': ''
         }
         print(f'session {__key} not found, recreating var')
+
+# executo quando este singleton for carregado pela primeira vez.
+# quando houver a execucao em uma nova sessao, as variaveis de
+# sessao aida nao terao sido criadas, por isso chamo a execucao
+# desta rotina em todas as rotinas deste modulo, para que sejam
+# inicializadas.
+
 check_session()
 
 # set current role
@@ -69,9 +76,14 @@ def role_in(set_of_roles):
     check_session()
     return st.session_state[__key]['role'] in set_of_roles
 
-# check if defined role or user
-def valid():
+# check if is there a role defined
+def valid_role():
     """ TODO: docstring """
     check_session()
-    return bool(get_user() or get_role())
+    return bool(get_role())
 
+# check if is there a user defined
+def valid_user():
+    """ TODO: docstring """
+    check_session()
+    return bool(get_user())

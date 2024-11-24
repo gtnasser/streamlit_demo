@@ -2,10 +2,10 @@
 import streamlit as st
 import auth
 
-st.header('Page1 is available to :red[everyone]')
+st.subheader('Auth Sample Page #1 Available to :red[everyone]')
 
 # validate session role
-if not auth.valid():
+if not auth.valid_role():
     st.warning('**Role status**: You are currently not logged.')
 else:
     st.success(f'**Role status**: You are currently logged as **{auth.get_role()}**.')

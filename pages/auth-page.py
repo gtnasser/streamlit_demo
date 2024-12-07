@@ -5,10 +5,10 @@ import auth
 st.subheader('Auth Sample Page')
 st.write('This sample allows you change the :red[role] and check how Auth Sample Pages can or not be accessed.')
 
-st.write(f":blue[**Auth data**]:    :{'green' if auth.valid_role() else 'red'}-background[role:'{auth.get_role()}']  :{'green' if auth.valid_user() else 'red'}-background[user:'{auth.get_user()}'] ")
+st.write(f":blue[**Auth data**]:    :{'green' if auth.isvalid_role() else 'red'}-background[role:'{auth.get_role()}']  :{'green' if auth.isvalid_user() else 'red'}-background[user:'{auth.get_user()}'] ")
 
 # validate session role
-if not auth.valid_role():
+if not auth.isvalid_role():
     st.error('**Role status**: You are currently not logged.')
 else:
     st.success(f'**Role status**: You are currently logged as **{auth.get_role()}**.')
@@ -53,7 +53,7 @@ content_area.markdown(
     Page # | Criteria | Code | Can :red[{auth.get_role()}] access it?
     --- | --- | --- | ---
     1 | No validation | | :heavy_check_mark:
-    2 | Anynone logged | `auth.valid_role() == True` | {':heavy_check_mark:' if auth.valid_role() else ':x:'}
+    2 | Anynone logged | `auth.isvalid_role() == True` | {':heavy_check_mark:' if auth.isvalid_role() else ':x:'}
     3 | Just **admin** role | `auth.role_in(['admin']) == True` | {':heavy_check_mark:' if auth.role_in(['admin']) else ':x:'}
     """
 )

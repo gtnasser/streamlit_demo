@@ -14,7 +14,7 @@ def goto_page(pagename, seconds):
     st.switch_page(pagename)
 
 # validate session role
-if not auth.valid_role():
+if not auth.isvalid_role():
     st.error('**Role status**: You are currently not logged.')
     st.image('img/access-0.png')
     goto_page('app.py', 5)

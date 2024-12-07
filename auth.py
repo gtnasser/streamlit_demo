@@ -12,8 +12,8 @@
 # - default = None
 # - deve ser atualizada apos a autenticacao do usuario, com a role do usuario, ex: 'auth.set_role("authenticated_role")'
 # - deve ser recuperada toda vez que for necessario valida-la, ex: 'current_role = auth.get_role()'
-# - pode ser verificada se foi definida com 'exists_current_role = auth.valid_role()'
-# - para validar se a role atual esta no conjunto a ser validado, use `auth.role_in([valid_role_set])`
+# - pode ser verificada se foi definida com 'exists_current_role = auth.isvalid_role()'
+# - para validar se a role atual esta no conjunto a ser validado, use `auth.role_in([isvalid_role_set])`
 #
 # user == usuario atual
 #
@@ -21,7 +21,7 @@
 # - default = None
 # - deve ser atualizado apos a autenticacao do usuario -> 'auth.set_user(new_user_info)'
 # - deve ser recuperado com 'auth.get_user()'
-# - pode ser verificada se foi definico com 'auth.valid_user()'
+# - pode ser verificada se foi definico com 'auth.isvalid_user()'
 #
 """
 TODO: documentar: colocar versao, copy, usage, etc
@@ -88,13 +88,13 @@ def role_in(set_of_roles):
     return st.session_state[__key]['role'] in set_of_roles
 
 # check if is there a role defined
-def valid_role():
+def isvalid_role():
     """ TODO: docstring """
     check_session()
     return bool(get_role())
 
 # check if is there a user defined
-def valid_user():
+def isvalid_user():
     """ TODO: docstring """
     check_session()
     return bool(get_user())

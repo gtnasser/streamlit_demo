@@ -1,16 +1,27 @@
 # usage: ???
 #
-# role -> regra atual
-# - default = ''
-# - deve ser atualizada apos a autenticacao do usuario -> 'auth.set_role("new_role")'
-# - pode ser recuperada com 'auth.get_role()'
+# prove um mecanismo simples de verificacao da autenticacao do usuario no app
+# utiliza variaveis de sessao, portanto volateis, e devem ser utilizadas em conjunto
+# com um provedor de acesso a uma base de usuarios
 #
-# user -> usuario atual
-# - default = ''
-# - deve ser atualizado apos a autenticacao do usuario -> 'auth.set_user("new_user")'
-# - pode ser recuperado com 'auth.get_user()'
+# trata dois niveis de informacao, role e usuario
 #
-# valida se a role atual esta no conjunto -> `auth.role_in([this_set])`
+# role == regra atual
+# armazena o nivel de acesso ou a regra a ser utilizada para validar a autenticacao
+#
+# - default = None
+# - deve ser atualizada apos a autenticacao do usuario, com a role do usuario, ex: 'auth.set_role("authenticated_role")'
+# - deve ser recuperada toda vez que for necessario valida-la, ex: 'current_role = auth.get_role()'
+# - pode ser verificada se foi definida com 'exists_current_role = auth.valid_role()'
+# - para validar se a role atual esta no conjunto a ser validado, use `auth.role_in([valid_role_set])`
+#
+# user == usuario atual
+#
+# de conteudo livre, armazena as informacoes do usuario a serem utilizadas no projeto
+# - default = None
+# - deve ser atualizado apos a autenticacao do usuario -> 'auth.set_user(new_user_info)'
+# - deve ser recuperado com 'auth.get_user()'
+# - pode ser verificada se foi definico com 'auth.valid_user()'
 #
 """
 TODO: documentar: colocar versao, copy, usage, etc
@@ -31,8 +42,8 @@ def check_session():
     """ TODO: docstring """
     if __key not in st.session_state:
         st.session_state[__key] = {
-            'role': '',
-            'user': ''
+            'role': None,
+            'user': None
         }
         print(f'session {__key} not found, recreating var')
 

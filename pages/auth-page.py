@@ -50,11 +50,12 @@ with filter_area:
 st.divider()
 content_area.markdown(
     f"""
-    Page # | Criteria | Code | Am I :red[{auth.get_role()}] Allowed to?
+    Page # | Criteria | Code | Can :red[{auth.get_role()}] access it?
     --- | --- | --- | ---
     1 | No validation | | :heavy_check_mark:
     2 | Anynone logged | `auth.valid_role() == True` | {':heavy_check_mark:' if auth.valid_role() else ':x:'}
     3 | Just **admin** role | `auth.role_in(['admin']) == True` | {':heavy_check_mark:' if auth.role_in(['admin']) else ':x:'}
     """
 )
+
 

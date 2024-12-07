@@ -21,11 +21,11 @@ st.write("")
 st.markdown('''
 ### Features
 
+:heavy_check_mark: multipage auth validation  \
+
 :heavy_check_mark: session role authentication  \
 
 :white_large_square: persistent role authentication  \
-
-:heavy_check_mark: multipage auth validation  \
 
 ''')
 

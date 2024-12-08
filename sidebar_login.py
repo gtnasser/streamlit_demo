@@ -10,7 +10,7 @@ def do_login(username, password):
     if userctl.validate(username, password):
         user = userctl.get_data(username)
         auth.set_role(user.get('roleid', None))
-        auth.set_user(user) #['userid'])
+        auth.set_user(user)
         return True
     return False
 
@@ -28,8 +28,33 @@ def sidebar_login():
 
         if auth.isvalid_user():
             user = auth.get_user()
-            login_area.write(f"Usuário: {user.get('name',None) or user.get('userid',None)}")
-            login_area.write(f"Role: {user.get('roleid',None)}")
+
+#            1. somente texto simples
+#            login_area.write(f"Usuário: {user.get('name',None) or user.get('userid',None)}")
+#            login_area.write(f"Role: {user.get('roleid',None)}")
+
+#            2. texto dentro de uma area success
+#            login_area.success(f"Usuário: {user.get('name',None) or user.get('userid',None)}  \n Role: {user.get('roleid',None)}")
+
+#            3. avatar
+#            cols = login_area.columns([3,8], vertical_alignment='center')
+#            with cols[0]:
+#                st.image("https://api.multiavatar.com/{user.get('userid',None)}.svg", width=80)
+#                #st.image("https://robohash.org/{user.get('userid',None)}", width=80)
+#            with cols[1]:
+#                st.success(f"Usuário: **{user.get('name',None) or user.get('userid',None)}**  \n Role: {user.get('roleid',None)}")
+
+#            4. avatar inside alert
+
+            #userid = user.get("userid",None)
+            userid = time.time()
+            #div1 = f'<img style="width: 60px" src="https://robohash.org/{userid}">'
+            div1 = f'<img style="width: 50px;margin-right: 20px;" src="https://api.multiavatar.com/{userid}.svg">'
+            div2 = f"<div>Usuário: <b>{user.get('name',None) or user.get('userid',None)}</b> <br> Role: {user.get('roleid',None)}</div>"
+            html = f'<div style="background-color:#e8f9ee;color:#177233;padding:10px;border-radius:5px;display:flex;align-items:center">{div1}{div2}</div>'
+            st.write(html, unsafe_allow_html=True)
+
+
             if st.button('LOGOUT', use_container_width=True, type='primary'):
                 do_logout()
                 st.rerun()
@@ -48,6 +73,7 @@ def sidebar_login():
                         st.rerun()
                     else:
                         login_area.error('Usuário/senha inválidos')
+
 
             # teste: mostrar usuarios disponiveis
             users1 = login_area.container(border=True)
